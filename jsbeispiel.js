@@ -24,10 +24,19 @@ function count(ch){
     console.log(count)
 }
 
-function cap(mot){
-		mot=mot[0].toUpperCase()+mot.slice(1,mot.length-1)
-    console.log(mot)
+function cap(phrase) {
+    let result = phrase.charAt(0).toUpperCase();  
+    for (let i = 1; i < phrase.length; i++) {
+        if (phrase[i - 1] === " ") {
+            result += phrase[i].toUpperCase();  
+        } else {
+            result += phrase[i]; 
+        }
+    }
+    
+    console.log(result);  
 }
+
 
 function max(arr){
 let max=arr[0]
@@ -68,28 +77,38 @@ function filter(arr) {
     console.log(arr2.join(''));
 }
 
-function fact(number) {
-    let fact = "1";
 
-    function PrimeFactors(n) {
-        let factors = [];
-        for (let i = 2; i <= n; i++) {
-            while (n % i === 0) {
-                factors.push(i);
-                n /= i;
-            }
+
+function PrimeFactors(n) {
+    n = parseInt(n, 10); 
+
+    if (isNaN(n) || n < 1) {
+        return "Input must be a positive integer"; 
+    }
+
+    let factors = [];
+
+    while (n % 2 === 0) {
+        factors.push(2);
+        n /= 2;
+    }
+
+    for (let i = 3; i <= Math.sqrt(n); i += 2) {
+        while (n % i === 0) {
+            factors.push(i);
+            n /= i;
         }
-        return factors;
     }
 
-    let primeFactors = PrimeFactors(number);
-
-    for (let i = 0; i < primeFactors.length; i++) {
-        fac += "x" + primeFactors[i];
+    if (n > 2) {
+        factors.push(n);
     }
 
-    return fact;
+    return factors;
 }
+
+console.log(PrimeFactors("475"));
+
 
 function generateFibonacci(terms) {
     let sequence = [0, 1];
@@ -99,3 +118,21 @@ function generateFibonacci(terms) {
     return sequence.slice(0, terms);
 }
 
+function factorial(n) {
+    let result = 1;
+    let equation = "";
+    
+    for (let i = 1; i <= n; i++) {
+        result *= i;
+        equation += i;
+        if (i < n) {
+            equation += "*";
+        }
+    }
+    
+    equation += "=" + result;
+    return equation;
+}
+
+let number = 15; 
+console.log(factorial(number));
